@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
+#define _USE_MATH_DEFINES
 #include <cmath>
-
+#include <math.h>
 using std::string, std::cout;
 
 double fun(double x){
@@ -46,9 +47,8 @@ double* generateChebyshev(int n) {
 
 
 int main() {
-    //założenie że dzielimy co 0.1
     double h = 0.1;
-    int n = static_cast<int>(2./0.1)+1;
+    int n = static_cast<int>(2./h)+1;
     auto *xi = new double [n];
     auto *fxi = new double [n];
     double x = -1;
@@ -57,12 +57,9 @@ int main() {
         fxi[i] = fun(x);
         x+=h;
     }
-    /*for (int i = 0; i < n; ++i) {
-        cout << xi[i]<< " " << fxi[i] << '\n';
-    }*/
 
     double *c = calcC(n, xi, fxi);
-    double h2 = h/10;
+    double h2 = 0.001;
     std::ofstream plik("wynik.txt");
     x = -1;
     while(x<=1){
